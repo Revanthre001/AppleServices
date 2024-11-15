@@ -1,66 +1,59 @@
-export default function Page() {
-  const services = [
-    {
-      id: "repair",
-      name: "Repair Services",
-      description: "Professional repair for all Apple devices",
-      // icon: Wrench,
-      image:
-        "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&q=80&w=500&h=300",
-    },
-    {
-      id: "screen-replacement",
-      name: "Screen Replacement",
-      description: "Quick and reliable screen replacement service",
-      // icon: Smartphone,
-      image:
-        "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=500&h=300",
-    },
-    {
-      id: "upgrade",
-      name: "Hardware Upgrade",
-      description: "Upgrade your device performance",
-      // icon: Laptop,
-      image:
-        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=500&h=300",
-    },
-    {
-      id: "diagnostic",
-      name: "Diagnostic Service",
-      description: "Comprehensive device diagnostics",
-      // icon: Clock,
-      image:
-        "https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&q=80&w=500&h=300",
-    },
-  ];
+import { ServiceInterface } from '@/interfaces/main'
+import { draftMode } from 'next/headers'
+import * as contentful from '@/services/contentful'
+import Image from 'next/image'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+
+export default async function Page() {
+  const { isEnabled } = await draftMode()
+  const entryCollection = await contentful.getEntriesWithCache('service', isEnabled, {
+    limit: 30,
+    include: 10
+  })
+  const services = entryCollection as unknown as { items: ServiceInterface[] }
+
+  if (services.items && services.items.length < 0) {
+    notFound()
+  }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">Our Services</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* {services.map((service) => (
+    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+      <h2 className='text-4xl font-bold mb-8'>Our Services</h2>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+        {services.items.map((service: ServiceInterface, index: number) => (
           <Link
-            key={service.id}
-            to={`/services/${service.id}`}
-            className="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+            key={index}
+            href={`/services/${service.fields.slug}`}
+            className='group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow'
           >
-            <div className="aspect-w-16 aspect-h-9">
-              <img
-                src={service.image}
-                alt={service.name}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            <div className='aspect-w-16 aspect-h-9 relative h-48 overflow-hidden'>
+              <Image
+                src={`https:${service.fields.icon.fields.file.url}`}
+                alt={service.fields.icon.fields.file.title || ''}
+                fill
+                className='w-full h-[192px] object-cover group-hover:scale-105 transition-transform duration-300'
               />
             </div>
-            <div className="p-6">
-              <div className="flex items-center mb-4">
-                <service.icon className="h-6 w-6 text-blue-600 mr-2" />
-                <h2 className="text-xl font-semibold">{service.name}</h2>
+            <div className='p-6'>
+              <div className='flex items-center mb-4'>
+                <Image
+                  src={`https:${service.fields.icon.fields.file.url}`}
+                  alt={service.fields.icon.fields.file.title || ''}
+                  className='object-contain mb-2'
+                  height={24}
+                  width={24}
+                  style={{
+                    filter: 'invert(1) brightness(100%)'
+                  }}
+                />
+                <h2 className='text-xl font-semibold text-black'>{service.fields.name}</h2>
               </div>
-              <p className="text-gray-600">{service.description}</p>
+              <p className='text-gray-600'>{service.fields.summary}</p>
             </div>
           </Link>
-        ))} */}
+        ))}
       </div>
     </div>
-  );
+  )
 }

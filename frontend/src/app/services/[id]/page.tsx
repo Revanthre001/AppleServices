@@ -1,9 +1,5 @@
-export default function Page(){
- return(
-    <div>
-        Service Details
-    </div>
- )   
+export default function Page() {
+  return <div>Service Details</div>
 }
 
 // const { id } = useParams();

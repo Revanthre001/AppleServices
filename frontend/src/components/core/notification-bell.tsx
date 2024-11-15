@@ -1,40 +1,40 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react'
 // import { Bell } from 'lucide-react';
 // import { apiService, Notification } from '../services/api';
 
 const NotificationBell: React.FC = () => {
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [showNotifications, setShowNotifications] = useState(false);
+  // const [notifications, setNotifications] = useState<Notification[]>([])
+  // const [showNotifications, setShowNotifications] = useState(false)
 
-//   useEffect(() => {
-//     const fetchNotifications = async () => {
-//       const data = await apiService.getNotifications();
-//       setNotifications(data);
-//     };
+  //   useEffect(() => {
+  //     const fetchNotifications = async () => {
+  //       const data = await apiService.getNotifications();
+  //       setNotifications(data);
+  //     };
 
-//     fetchNotifications();
-//     const interval = setInterval(fetchNotifications, 30000);
-//     return () => clearInterval(interval);
-//   }, []);
+  //     fetchNotifications();
+  //     const interval = setInterval(fetchNotifications, 30000);
+  //     return () => clearInterval(interval);
+  //   }, []);
 
-//   const unreadCount = notifications.filter(n => !n.seen).length;
+  //   const unreadCount = notifications.filter(n => !n.seen).length;
 
-//   const handleNotificationClick = async (notification: Notification) => {
-//     if (!notification.seen) {
-//       await apiService.markNotificationAsSeen(notification.id);
-//       setNotifications(notifications.map(n =>
-//         n.id === notification.id ? { ...n, seen: true } : n
-//       ));
-//     }
-//   };
+  //   const handleNotificationClick = async (notification: Notification) => {
+  //     if (!notification.seen) {
+  //       await apiService.markNotificationAsSeen(notification.id);
+  //       setNotifications(notifications.map(n =>
+  //         n.id === notification.id ? { ...n, seen: true } : n
+  //       ));
+  //     }
+  //   };
 
   return (
-    <div className="relative">
+    <div className='relative'>
       <button
-        onClick={() => setShowNotifications(!showNotifications)}
-        className="relative p-2 hover:bg-gray-700 rounded-full"
+        // onClick={() => setShowNotifications(!showNotifications)}
+        className='relative p-2 hover:bg-gray-700 rounded-full'
       >
         {/* <Bell className="h-6 w-6" />
         {unreadCount > 0 && (
@@ -44,12 +44,12 @@ const NotificationBell: React.FC = () => {
         )} */}
       </button>
 
-      {showNotifications && (
-        <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-50">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-2">Notifications</h3>
-            <div className="space-y-2 max-h-96 overflow-y-auto">
-              {/* {notifications.length > 0 ? (
+      {/* {showNotifications && (
+        <div className='absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-50'>
+          <div className='p-4'>
+            <h3 className='text-lg font-semibold mb-2'>Notifications</h3>
+            <div className='space-y-2 max-h-96 overflow-y-auto'>
+              {notifications.length > 0 ? (
                 notifications.map(notification => (
                   <div
                     key={notification.id}
@@ -68,13 +68,13 @@ const NotificationBell: React.FC = () => {
                 <p className="text-gray-500 text-center py-4">
                   No notifications
                 </p>
-              )} */}
+              )}
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
-  );
-};
+  )
+}
 
-export default NotificationBell;
+export default NotificationBell
