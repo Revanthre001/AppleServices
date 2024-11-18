@@ -1,4 +1,3 @@
-import HeroBannerComponent from '@/components/cms/hero-banner/component'
 import { draftMode } from 'next/headers'
 import * as contentful from '@/services/contentful'
 import { notFound } from 'next/navigation'
