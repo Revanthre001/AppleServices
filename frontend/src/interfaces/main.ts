@@ -43,6 +43,15 @@ export interface ProductInterface {
         }
       }
     }
+    gallery: {
+      fields: {
+        file: {
+          url: string
+          title: string
+        }
+      }
+    }[]
+    price: string
     category: CategoryInterface
   }
 }
