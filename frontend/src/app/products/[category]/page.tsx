@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: Promise<{ category: str
         {products.items.map((product: ProductInterface, index: number) => (
           <Link
             key={index}
-            href={`/products/${category}/${product.fields.name}`}
+            href={`/products/${category}/${product.fields.slug}`}
             className='group rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow'
           >
             <div className='overflow-hidden h-[270px]'>

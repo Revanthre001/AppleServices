@@ -1,4 +1,4 @@
-const Footer = () => {
+const Footer = async () => {
   const adminInfo = {
     name: 'John Smith',
     email: 'admin@appleservices.com',
